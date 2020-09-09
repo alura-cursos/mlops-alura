@@ -47,7 +47,8 @@ jobs:
       run: |-
         gcloud builds submit \
           --quiet \
-          --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+          --config cloudbuild.yaml \
+          --subtitutions _BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME, _BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD, _IMAGE_TAG=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
 
     # Deploy image to Cloud Run
     - name: Deploy
@@ -57,4 +58,5 @@ jobs:
           --region "$RUN_REGION" \
           --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
           --platform "managed" \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --port 5000
