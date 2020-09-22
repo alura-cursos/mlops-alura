@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 name: Build and Deploy to Cloud Run
 
 on:
@@ -49,7 +48,7 @@ jobs:
         gcloud builds submit \
           --quiet \
           --config cloudbuild.yaml \
-          --substitutions _BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME,_BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD,_IMAGE_TAG=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
+          --subtitutions _BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME, _BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD, _IMAGE_TAG=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
 
     # Deploy image to Cloud Run
     - name: Deploy
